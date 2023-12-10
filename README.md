@@ -41,7 +41,7 @@ Na finalização da compra é disponibilizado um JSON com os dados da compra e d
 
 ## Demonstração
 
-Link para o projeto implantado: [Link para o Projeto](https://genericosgenericorp.netlify.app/)
+Link para o projeto implantado: [Link para o Projeto](https://main--coruscating-truffle-3e7881.netlify.app/)
 
 ## Próximos Passos
 
