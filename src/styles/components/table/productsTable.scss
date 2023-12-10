@@ -1,0 +1,16 @@
+.table-checkout {
+	th, td {
+		text-align: left;
+	}
+	.img-checkout {
+		width: 80px;
+	}
+	.quantity-counter-checkout {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		.disabled {
+			color: #808080;
+		}
+	}
+}

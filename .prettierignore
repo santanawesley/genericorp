@@ -1,0 +1,9 @@
+dist
+node_modules
+*.html
+.cache
+package.json
+package-lock.json
+public
+.vscode
+src/assets

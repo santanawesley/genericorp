@@ -1,0 +1,125 @@
+.wrapper-cart {
+	svg {
+		cursor: pointer;
+	}
+	.total-value {
+		font-size: 20px;
+		font-weight: bold;
+		padding: 0 20px;
+		display: flex;
+		justify-content: space-between;
+	}
+	.cart {
+		position: absolute;
+		top: -20px;
+		right: -20px;
+		height: 100vh;
+		width: 100vw;
+		background-color: rgba(0,0,0,.8);
+		box-sizing: border-box;
+		z-index: 1;
+		border-radius: 0;
+		&::before {
+			content: none;
+		}
+	}
+	.content-cart {
+		width: 400px;
+    height: 100vh;
+		padding: 20px 0;
+		background-color: #fff;
+		position: absolute;
+		display: flex;
+		right: 0;
+    flex-direction: column;
+    justify-content: space-between;
+		box-sizing: border-box;
+		@media(max-width: 480px) {
+			width: 90%;
+		}
+		.button-close {
+			position: absolute;
+			right: 20px;
+		}
+		.wrapper-infos-products {
+			display: flex;
+			flex-direction: column;
+			overflow: auto;
+		}
+		.text-empty {
+			text-align: center;
+			font-size: 22px;
+			height: 100vh;
+			align-items: center;
+			justify-content: center;
+			display: flex;
+			flex-direction: column;
+		}
+		.title-cart {
+			text-align: center;
+			font-size: 20px;
+			margin: 10px 20px 20px;
+		}
+		.wrapper-products-cart {
+			display: flex;
+	    flex-direction: column;
+			gap: 10px;
+			border-top: 1px solid #eee;
+			border-bottom: 1px solid #eee;
+			padding: 15px 10px;
+			overflow-y: auto;
+			.products-cart {
+				align-items: center;
+				box-shadow: 2px 3px 5px #999;
+				padding: 10px;
+				display: flex;
+				position: relative;
+				gap: 15px;
+				.img-cart {
+					width: 110px;
+					@media(max-width: 480px) {
+						width: 90px;
+					}
+				}
+				.info-product {
+					gap: 5px;
+					padding-right: 30px;
+					display: flex;
+					flex-direction: column;
+				}
+				.quantity-counter {
+					display: flex;
+					align-items: center;
+			    gap: 10px;
+					.disabled {
+						color: #808080;
+					}
+				}
+				.input-quantity {
+					max-height: 30px;
+					input {
+						padding: 10px;
+						width: 35px;
+					}
+				}
+				.icon-close-cart {
+					position: absolute;
+					right: 15px;
+				}
+				p {
+					margin: 0;
+				}
+			}
+		}
+		.buttons-cart {
+			display: flex;
+			flex-direction: column;
+			gap: 15px;
+	    padding: 0 20px;
+			.button-advance {
+				color: #fff;
+				background-color: #1e2b4b;
+			}
+		}
+	}
+}

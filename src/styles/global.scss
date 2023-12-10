@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  box-sizing: border-box;
+  color: #1e2b4b;
+  background-color: #f5f5dc;
+  &::-webkit-scrollbar {
+    width: 0! important
+  };
+
+}
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+	height: 100vh;
+  &::-webkit-scrollbar {
+    width: 0! important
+  };
+  @media(max-width: 480px) {
+    font-size: 14px;
+  }
+}
+button {
+  border: 1px solid #808080;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.buttons-column {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin: 30px 0;
+}
+.button-advance {
+	color: #fff;
+	background-color: #1e2b4b;
+}
+.button-return {
+	color: #1e2b4b;
+	background-color: transparent;
+}
+.link-register {
+	text-align: center;
+	width: 100%;
+	display: block;
+	background: inherit;
+	border: none;
+	cursor: pointer;
+	.cta-register {
+		text-decoration: underline;
+		font-weight: bold;
+	}
+}
+.buttons-row {
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+	button {
+		min-width: 70px;
+	}
+}
+

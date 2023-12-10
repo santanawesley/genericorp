@@ -1,0 +1,11 @@
+dist
+build
+node_modules
+coverage
+.cache
+package.json
+package-lock.json
+public
+.eslintrc.json
+.vscode
+src/assets
