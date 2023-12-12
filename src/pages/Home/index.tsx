@@ -25,7 +25,7 @@ const Home = () => {
 	const [amountProducts, setAmountProducts] = useState(0);
 	const [cardsHtml, setCardsHtml] = useState<JSX.Element[]>();
 	const [receivedData, setReceivedData] = useState<ProductData[] | undefined>();
-	const [selectedData, setSelectedData] = useState<ProductData[] | undefined>();
+	const [selectedDataSku, setSelectedDataSku] = useState<string>('');
 	const [favoriteFilter, setFavoriteFilter] = useState(false);
 	const [favoriteFilterData, setFavoriteFilterData] = useState<
 		ProductData[] | undefined
@@ -42,7 +42,7 @@ const Home = () => {
 
 	useEffect(() => {
 		mountCardsHtml();
-	}, [receivedData, favoriteFilter, selectedData, actualPage]);
+	}, [receivedData, favoriteFilter, selectedDataSku, actualPage]);
 
 	useEffect(() => {
 		setReceivedData(cardsData);
@@ -60,11 +60,11 @@ const Home = () => {
 	};
 
 	const mountCardsHtml = () => {
-		const productData = selectedData
-			? selectedData
-			: favoriteFilter
-			  ? favoriteFilterData
-			  : receivedData;
+		let productData = favoriteFilter ? favoriteFilterData : receivedData;
+		if (selectedDataSku)
+			productData = productData?.filter(
+				product => product.sku === selectedDataSku,
+			);
 
 		setAmountProducts(productData?.length || 0);
 		const cardsHtmlBuilt = productData
@@ -77,12 +77,13 @@ const Home = () => {
 					imageUrl,
 					name,
 					value,
+					sku,
 				} = card;
 
 				return (
 					<li key={idx} className="card" id={name}>
 						<div
-							onClick={() => navigate(`/produto/${card.sku}`)}
+							onClick={() => navigate(`/produto/${sku}`)}
 							className="link-to-details"
 						>
 							<div>
@@ -98,7 +99,7 @@ const Home = () => {
 								)}
 								<div
 									className="icon-favorite"
-									onClick={e => alternateFavorite(card.sku, e)}
+									onClick={e => alternateFavorite(sku, e)}
 								>
 									{favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
 								</div>
@@ -112,8 +113,8 @@ const Home = () => {
 						</div>
 						<Button
 							variant="contained"
-							className={card.hasBuyIntention ? 'cta-selected' : 'card-cta'}
-							onClick={() => buyIntention(card.sku)}
+							className={hasBuyIntention ? 'cta-selected' : 'card-cta'}
+							onClick={() => buyIntention(sku)}
 						>
 							{hasBuyIntention ? 'Adicionado' : 'Comprar'}
 						</Button>
@@ -124,10 +125,8 @@ const Home = () => {
 		setCardsHtml(cardsHtmlBuilt);
 	};
 
-	const receiveDataSelected = (cardsDataSelected: ProductData | string) => {
-		cardsDataSelected === 'clear'
-			? setSelectedData(undefined)
-			: setSelectedData([cardsDataSelected as ProductData]);
+	const receiveDataSelected = (cardsSkuSelected: string) => {
+		setSelectedDataSku(cardsSkuSelected);
 	};
 
 	const alternateFavorite = (

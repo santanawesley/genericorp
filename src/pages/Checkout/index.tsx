@@ -111,7 +111,7 @@ const Checkout = () => {
 						onBlur={e => checkData(e)}
 					/>
 					<p className="label">Nome</p>
-					{!checkName && <p className="error">Preencha seu nome!</p>}
+					{/* {!checkName && <p className="error">Preencha seu nome!</p>}
 					<Input
 						value={userDataCheckout.email}
 						name="email"
@@ -123,7 +123,7 @@ const Checkout = () => {
 					{!checkEmail && <p className="error">Preencha seu e-mail!</p>}
 					{checkEmail && !validateEmail && (
 						<p className="error">Formato de e-mail incorreto!</p>
-					)}
+					)} */}
 					<Input
 						value={masks.phone(userDataCheckout.phone.toString())}
 						name="phone"
@@ -242,6 +242,7 @@ const Checkout = () => {
 				setQuantityBuyIntention(product.sku, 0);
 			});
 
+			window.scrollTo(0, 0);
 			setShowThankYouModal(true);
 		} else {
 			showToast(
@@ -261,7 +262,10 @@ const Checkout = () => {
 	};
 
 	return (
-		<div className="wrapper-checkout">
+		<div
+			className="wrapper-checkout"
+			style={{ overflow: `${showThankYouModal ? 'hidden' : ''}` }}
+		>
 			{isAuthenticated ? (
 				productsDataIntent.length || showThankYouModal ? (
 					<>

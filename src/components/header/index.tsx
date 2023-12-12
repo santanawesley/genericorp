@@ -28,7 +28,7 @@ const Header: React.FC = () => {
 				</Link>
 			</div>
 			<div className="header-center">
-				<h1>GENERICORP</h1>
+				<h1>Genericorp</h1>
 			</div>
 			<div className="header-right">
 				<Favorites

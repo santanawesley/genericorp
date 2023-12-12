@@ -4,7 +4,6 @@
 	padding: 90px 20px 10px;
 	height: 100%;
 	position: relative;
-	overflow: auto;
 	.text-empty {
 		margin-top: 10%;
 	}
@@ -89,9 +88,9 @@
 	}
 	.wrapper-thanks-modal {
 		position: absolute;
-		top: -20px;
-		right: -20px;
-		height: 100vh;
+		top: 0;
+		right: 0;
+		height: 100%;
 		width: 100vw;
 		background-color: rgba(0,0,0,.8);
 		box-sizing: border-box;

@@ -14,6 +14,7 @@
   }
   .pdp {
     display: flex;
+		justify-content: center;
     overflow: hidden;
     padding: 0 50px 30px;
     gap: 20px;
@@ -25,10 +26,11 @@
       gap: 0;
     }
     .image-icon-favorite {
-        width: 65%;
+        width: 280px;
         position: relative;
         @media(max-width: 480px) {
-          width: 100%;
+          width: 70%;
+					margin: auto;
         }
       .image-pdp {
         width: 100%;
@@ -42,8 +44,9 @@
       }
     }
     .wrapper-infos-pdp {
-      width: 35%;
+      max-width: 35%;
       @media(max-width: 480px) {
+				max-width: none;
         width: 100%;
       }
       .value-product-pdp {
@@ -55,6 +58,9 @@
       }
       button {
         background-color: #1e2b4b;
+			  @media(max-width: 480px) {
+					width: 100%;
+				}
       }
 			.cta-selected {
 				background-color: #008000;

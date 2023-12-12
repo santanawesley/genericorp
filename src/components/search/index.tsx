@@ -5,7 +5,7 @@ import { ProductContext, ProductData } from '../../contexts/ProductContext';
 import './search.css';
 
 interface SearchProps {
-	sendDataChoosen: (receiveDataSelected: ProductData | string) => void;
+	sendDataChoosen: (cardsSkuSelected: string) => void;
 }
 
 const Search = ({ sendDataChoosen }: SearchProps) => {
@@ -23,7 +23,7 @@ const Search = ({ sendDataChoosen }: SearchProps) => {
 		event: React.ChangeEvent<{}>,
 		value: ProductData | null,
 	) => {
-		value ? sendDataChoosen(value) : sendDataChoosen('clear');
+		value ? sendDataChoosen(value.sku) : sendDataChoosen('');
 	};
 
 	return (

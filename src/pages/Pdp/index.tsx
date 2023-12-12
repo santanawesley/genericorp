@@ -57,13 +57,17 @@ const PDP = () => {
 								variant="text"
 							/>
 						)}
-						<div onClick={() => alternateFavorite(card.sku)}>
-							{card?.favorite ? (
-								<FavoriteIcon className="icon-favorite-pdp" />
-							) : (
-								<FavoriteBorderIcon className="icon-favorite-pdp" />
-							)}
-						</div>
+						{card?.favorite ? (
+							<FavoriteIcon
+								className="icon-favorite-pdp"
+								onClick={() => alternateFavorite(card.sku)}
+							/>
+						) : (
+							<FavoriteBorderIcon
+								className="icon-favorite-pdp"
+								onClick={() => alternateFavorite(card.sku)}
+							/>
+						)}
 					</div>
 					<div className="wrapper-infos-pdp">
 						<p className="description-product-pdp">{card?.description}</p>
