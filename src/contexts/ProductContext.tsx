@@ -150,24 +150,85 @@ const ProductsProvider: React.FC<MyComponentProps> = ({ children }) => {
 		setIds(Array.from(words));
 	}
 
-	const getImages = async (startIndex: number, endIndex: number) => {
+	const getImages = async (wordsArray: string[]) => {
 		const images = [];
-		for (let i = startIndex; i <= endIndex; i++) {
-			const response = await fetch(`https://picsum.photos/id/${i}/200/300`);
-			const imageURL = response.url;
-			images.push(imageURL);
+
+		for (const word of wordsArray) {
+			try {
+				const response = await fetch(
+					`https://picsum.photos/seed/${word}/200/300`,
+				);
+				const imageUrl = response.url;
+				images.push(imageUrl);
+			} catch (error) {
+				console.error(`Erro ao buscar imagem para ${word}: ${error}`);
+				images.push('');
+			}
 		}
 		return images;
 	};
 
 	const fetchRandomImages = useCallback(async () => {
+		const words = [
+			'banana',
+			'uva',
+			'maça',
+			'pera',
+			'laranja',
+			'abacaxi',
+			'morango',
+			'melancia',
+			'limão',
+			'abacate',
+			'melão',
+			'mamão',
+			'kiwi',
+			'pêssego',
+			'ameixa',
+			'caqui',
+			'cereja',
+			'framboesa',
+			'mirtilo',
+			'goiaba',
+			'manga',
+			'maracujá',
+			'figo',
+			'nectarina',
+			'tangerina',
+			'jabuticaba',
+			'caju',
+			'pitanga',
+			'abacaxi',
+			'piqui',
+			'abóbora',
+			'cenoura',
+			'beterraba',
+			'batata',
+			'tomate',
+			'cebola',
+			'alho',
+			'pimentão',
+			'pepino',
+			'berinjela',
+			'abobrinha',
+			'couve-flor',
+			'brócolis',
+			'espinafre',
+			'rúcula',
+			'alface',
+			'repolho',
+			'salsão',
+			'coentro',
+			'cebolinha',
+		];
+
 		const promises = [];
 		let startIndex = 1;
 		const totalImages = 50;
 
 		while (startIndex <= totalImages) {
 			let endIndex = Math.min(startIndex + 9, totalImages);
-			promises.push(getImages(startIndex, endIndex));
+			promises.push(getImages(words.slice(startIndex, endIndex)));
 			startIndex += 10;
 		}
 
