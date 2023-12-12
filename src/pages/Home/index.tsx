@@ -27,9 +27,6 @@ const Home = () => {
 	const [receivedData, setReceivedData] = useState<ProductData[] | undefined>();
 	const [selectedDataSku, setSelectedDataSku] = useState<string>('');
 	const [favoriteFilter, setFavoriteFilter] = useState(false);
-	const [favoriteFilterData, setFavoriteFilterData] = useState<
-		ProductData[] | undefined
-	>([]);
 
 	useEffect(() => {
 		setReceivedData(cardsData);
@@ -60,11 +57,13 @@ const Home = () => {
 	};
 
 	const mountCardsHtml = () => {
-		let productData = favoriteFilter ? favoriteFilterData : receivedData;
+		let productData = receivedData;
 		if (selectedDataSku)
 			productData = productData?.filter(
 				product => product.sku === selectedDataSku,
 			);
+		if (favoriteFilter)
+			productData = productData?.filter(product => product.favorite);
 
 		setAmountProducts(productData?.length || 0);
 		const cardsHtmlBuilt = productData
@@ -146,8 +145,6 @@ const Home = () => {
 
 	const filterByFavorites = (filterFavorite: boolean) => {
 		setFavoriteFilter(filterFavorite);
-		const filtered = receivedData?.filter(product => product.favorite);
-		setFavoriteFilterData(filtered);
 	};
 
 	const changePage = (type: string) => {
@@ -159,7 +156,8 @@ const Home = () => {
 	return (
 		<div className="home">
 			<h1 className="title-home">Escolha seus produtos</h1>
-			{favoriteFilter && <p>Esses são seus produtos Favoritos</p>}
+			{favoriteFilter && <p>Filtro Favoritos ativo</p>}
+			{selectedDataSku && <p>Busca por nome ativa</p>}
 			<Search sendDataChoosen={receiveDataSelected} />
 			{cardsHtml?.length ? (
 				<>
@@ -181,7 +179,13 @@ const Home = () => {
 					<ul className="wrapper-cards">{cardsHtml}</ul>
 				</>
 			) : (
-				<div>Não há produtos para exibição</div>
+				<>
+					<div>
+						Não há produtos{' '}
+						{(selectedDataSku || favoriteFilter) && 'com esse filtro '} para
+						exibição
+					</div>
+				</>
 			)}
 		</div>
 	);
