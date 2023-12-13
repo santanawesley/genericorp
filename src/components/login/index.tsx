@@ -201,7 +201,6 @@ const Login = () => {
 	};
 
 	const resetFormsFields = () => {
-		console.log('resetou xxxxxxxxxxxxx');
 		setTypedLoginEmail('');
 		setTypedLoginPassword('');
 		setTypedUserName('');
