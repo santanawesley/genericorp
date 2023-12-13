@@ -223,11 +223,11 @@ const ProductsProvider: React.FC<MyComponentProps> = ({ children }) => {
 		];
 
 		const promises = [];
-		let startIndex = 1;
+		let startIndex = 0;
 		const totalImages = 50;
 
 		while (startIndex <= totalImages) {
-			let endIndex = Math.min(startIndex + 9, totalImages);
+			let endIndex = Math.min(startIndex + 10, totalImages);
 			promises.push(getImages(words.slice(startIndex, endIndex)));
 			startIndex += 10;
 		}

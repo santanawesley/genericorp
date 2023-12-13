@@ -27,6 +27,7 @@ const Home = () => {
 	const [receivedData, setReceivedData] = useState<ProductData[] | undefined>();
 	const [selectedDataSku, setSelectedDataSku] = useState<string>('');
 	const [favoriteFilter, setFavoriteFilter] = useState(false);
+	const [hoveredImage, setHoveredImage] = useState<number>(-1);
 
 	useEffect(() => {
 		setReceivedData(cardsData);
@@ -44,6 +45,63 @@ const Home = () => {
 	useEffect(() => {
 		setReceivedData(cardsData);
 	}, [cardsData]);
+
+	useEffect(() => {
+		const imageContainers = document.querySelectorAll('.image-product');
+		imageContainers.forEach((container, index) => {
+			container.addEventListener('mouseenter', () => handleMouseEnter(index));
+			container.addEventListener('mouseleave', handleMouseLeave);
+		});
+
+		return () => {
+			imageContainers.forEach((container, index) => {
+				container.removeEventListener('mouseenter', () =>
+					handleMouseEnter(index),
+				);
+				container.removeEventListener('mouseleave', handleMouseLeave);
+			});
+		};
+	}, []);
+
+	const zoomHoverImages = (imageId?: number) => {
+		const image = document.querySelectorAll(
+			`.image-${
+				typeof imageId === 'number' && !isNaN(imageId) ? imageId : hoveredImage
+			}`,
+		)[0] as HTMLElement;
+		const container = document.querySelector(
+			`.container-image-${
+				typeof imageId === 'number' && !isNaN(imageId) ? imageId : hoveredImage
+			}`,
+		);
+
+		container?.addEventListener('mousemove', e => {
+			if (e instanceof MouseEvent) {
+				const { left, top, width, height } = container.getBoundingClientRect();
+				const x = ((e.pageX - left) / width) * 100;
+				const y = ((e.pageY - top) / height) * 100;
+
+				image ? (image.style.transformOrigin = `${x}% ${y}%`) : false;
+			}
+		});
+
+		container?.addEventListener('mouseenter', () => {
+			image ? (image.style.transform = 'scale(1.4)') : false; // Altera o tamanho da imagem
+		});
+
+		container?.addEventListener('mouseleave', () => {
+			image ? (image.style.transform = 'scale(1)') : false; // Retorna ao tamanho original
+		});
+	};
+
+	const handleMouseEnter = (imageId: number) => {
+		zoomHoverImages(imageId);
+		setHoveredImage(imageId);
+	};
+
+	const handleMouseLeave = () => {
+		setHoveredImage(-1);
+	};
 
 	const buyIntention = (skuToBeChanged: string) => {
 		toggleBuyIntention(skuToBeChanged);
@@ -80,22 +138,34 @@ const Home = () => {
 				} = card;
 
 				return (
-					<li key={idx} className="card" id={name}>
+					<li
+						key={idx}
+						className="card"
+						id={name}
+						onMouseEnter={() => handleMouseEnter(idx)}
+						onMouseLeave={handleMouseLeave}
+					>
 						<div
 							onClick={() => navigate(`/produto/${sku}`)}
 							className="link-to-details"
 						>
 							<div>
 								<div className="product-name">{name}</div>
-								{imageUrl ? (
-									<img src={imageUrl} className="image-product" />
-								) : (
-									<Skeleton
-										height={300}
-										style={{ transform: 'scale(1)' }}
-										variant="text"
-									/>
-								)}
+								<div className={`container-image container-image-${idx}`}>
+									{imageUrl ? (
+										<img
+											src={imageUrl}
+											className={`image-product image-${idx}`}
+											alt={`Image ${idx}`}
+										/>
+									) : (
+										<Skeleton
+											height={300}
+											style={{ transform: 'scale(1)' }}
+											variant="text"
+										/>
+									)}
+								</div>
 								<div
 									className="icon-favorite"
 									onClick={e => alternateFavorite(sku, e)}
