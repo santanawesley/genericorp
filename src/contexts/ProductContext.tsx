@@ -261,7 +261,8 @@ const ProductsProvider: React.FC<MyComponentProps> = ({ children }) => {
 	};
 
 	const mountValue = (nameLength: number, descrLength: number) => {
-		const value = 10 + nameLength * ((500 - descrLength) / (4 - nameLength));
+		const divider = 4 - nameLength > 0 ? 4 - nameLength : 1;
+		const value = 10 + nameLength * ((500 - descrLength) / divider);
 		return value;
 	};
 
