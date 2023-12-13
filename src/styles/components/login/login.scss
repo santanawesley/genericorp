@@ -113,6 +113,9 @@
     border: none;
     padding: 0;
     cursor: pointer;
+		svg:hover {
+			transform: scale(1.1)
+		}
   }
 }
 .info-user-logged {
@@ -127,6 +130,9 @@
     align-items: center;
     height: 35px;
     width: 35px;
+		&:hover {
+			transform: scale(1.1)
+		}
   }
 }
 .label-input {

@@ -13,7 +13,10 @@
     cursor: pointer;
   }
   .linkHome {
-    color: inherit
+    color: inherit;
+		svg:hover {
+			transform: scale(1.1)
+		}
   }
   .header-left {
     position: absolute;
