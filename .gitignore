@@ -22,4 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Permitir que os arquivos de .css sejam enviados para o repositório por conta da necessidade do host de hospedagem especifico.
 # src/**/*.css

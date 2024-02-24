@@ -66,6 +66,14 @@
         cursor: pointer;
 				.container-image {
 					overflow: hidden;
+					.image-product {
+						width: 200px;
+				    height: 300px;
+						@media(max-width: 480px) {
+							width: 145px;
+							height: auto;
+						}
+					}
 					#zoomImage {
 						width: 100%;
 						-moz-transition: transform 0.3s ease-in-out;

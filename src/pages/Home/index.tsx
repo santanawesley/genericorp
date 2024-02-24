@@ -174,7 +174,15 @@ const Home = () => {
 								</div>
 							</div>
 							<div>
-								{limitDescription(description)}
+								{description ? (
+									limitDescription(description)
+								) : (
+									<Skeleton
+										height={135}
+										style={{ transform: 'scale(1)' }}
+										variant="text"
+									/>
+								)}
 								<div className="product-value">
 									{masks.currencyFormatter(value)}
 								</div>
